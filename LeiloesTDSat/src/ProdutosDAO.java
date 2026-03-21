@@ -24,19 +24,29 @@ public class ProdutosDAO {
     
     public void cadastrarProduto (ProdutosDTO produto){
         
-        
-        //conn = new conectaDAO().connectDB();
-        
-        
-    }
+        String sql = "INSERT INTO produtos (nome, valor, status) VALUES (?, ?, ?)";
+
+        conn = new conectaDAO().connectDB();
+
+        try {
+            prep = conn.prepareStatement(sql);
+
+            prep.setString(1, produto.getNome());
+            prep.setInt(2, produto.getValor());
+            prep.setString(3, produto.getStatus());
+
+            prep.execute();
+            prep.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+}
+               
     
     public ArrayList<ProdutosDTO> listarProdutos(){
         
         return listagem;
-    }
-    
-    
-    
-        
+    }  
 }
 
